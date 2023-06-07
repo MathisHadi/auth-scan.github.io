@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Télécharger le code HTML d'une page web</title>
+</head>
+<body>
+  <h1>Télécharger le code HTML d'une page web</h1>
+  <iframe id="clientSite" src="https://sinfonia.fr" width="100%" height="600"></iframe>
+
+  <button id="downloadBtn" onclick="downloadHTML()">Télécharger le code HTML</button>
+
+  <script>
+    function downloadHTML() {
+      var iframe = document.getElementById('clientSite');
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+      // Récupérer le contenu HTML de la page dans l'iframe
+      var htmlContent = iframeDocument.documentElement.outerHTML;
+
+      // Créer un objet Blob avec le contenu HTML
+      var blob = new Blob([htmlContent], { type: 'text/html' });
+
+      // Créer un lien de téléchargement et déclencher le téléchargement
+      var link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'page.html';
+      link.click();
+    }
+  </script>
+</body>
+</html>
